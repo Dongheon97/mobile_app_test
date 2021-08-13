@@ -8,84 +8,93 @@ init = function(){
 }
 
 click = function(x, y){
-    bot.go(x, y, -150);
+    bot.go(x, y, -155);
     waitSync(0.2);
-    bot.go(x, y, -165);
+    bot.go(x, y, -167);
     waitSync(0.2);
-    bot.go(x, y, -150);
+    bot.go(x, y, -155);
     init();
     console.log("Click Coordinate: ("+ x + ", "+ y + ")");
 }
 
-// Home button Double click
-double_home = function(){
-    bot.go(0, -42, -150);
-    waitSync(0.2);
-    bot.go(0, -42, -165);
-    waitSync(0.20);
-    bot.go(0, -42, -150);
-    waitSync(0.20);
-    bot.go(0, -42, -165);
-    waitSync(0.20);
-    bot.go(0, -42, -150);
+swipeRight = function(){
+    bot.go(20, 0, -163);
+    waitSync(0.18);
+    bot.go(-20, 0, -163);
     init();
-    console.log("Home Button Double Click");
+    console.log("Swipe Right");
 }
 
 swipeLeft = function(){
-    bot.go(20, 0, -163);
-    waitSync(0.18);
-    bot.go(-20, 0, -163);
-    init();
-    console.log("Swipe Left");
-}
-
-swipeRight = function(){
     bot.go(-20, 0, -163);
     waitSync(0.18);
     bot.go(20, 0, -163);
     init();
     console.log("Swipe Left");
-}
-
-swipeUp = function(){
-    bot.go(0, -20, -163);
-    waitSync(0.18);
-    bot.go(0, 20, -163);
-    init();
-    console.log("Swipe Up");
 }
 
 swipeDown = function(){
-    bot.go(0, 20, -163);
-    waitSync(0.18);
     bot.go(0, -20, -163);
+    waitSync(0.18);
+    bot.go(0, 20, -163);
     init();
     console.log("Swipe Down");
 }
 
-home = function(){
-    click(1, -42);
-    console.log("Home Button");
+swipeUp = function(){
+    bot.go(0, 20, -163);
+    waitSync(0.18);
+    bot.go(0, -20, -163);
+    init();
+    console.log("Swipe Up");
 }
 
-/*menu = function(){
-    const xs = -3;
-    const ys = 35;
+home = function(){
+    //click(0, -42);
+    click(3, 43);
+    console.log("Home Button");
+}
+// Home button Double click
+double_home = function(){
+    bot.go(3, 43, -155);
+    waitSync(0.2);
+    bot.go(3, 43, -167);
+    waitSync(0.20);
+    bot.go(3, 43, -155);
+    waitSync(0.20);
+    bot.go(3, 43, -167);
+    waitSync(0.20);
+    bot.go(3, 43, -155);
+    init();
+    console.log("Home Button Double Click");
+}
+
+menu_ios = function(){
+    const xs = 4;
+    const ys = -33;
     for(var i=0; i<9; i++){
-        bot.go(xs+2*i, ys-7*i, -150);
-        waitSync(0.5);
+        bot.go(xs, ys+(7*i), -155);
+        waitSync(1);
     }
-    
-}*/
+}
+
+galaxy = function(){
+    bot.go(-25, 20, -150);
+    waitSync(0.2);
+    bot.go(-25, 20, -163);
+    waitSync(0.2);
+    bot.go(0, 20, -163);
+    init();
+    console.log("Galaxy Menu");
+}
 
 
 launch = function(){
-    bot.go(1, -42, -150);
+    bot.go(3, 43, -157);
     waitSync(0.2);
-    bot.go(1, -42, -165);
+    bot.go(3, 43, -165);
     waitSync(1);
-    bot.go(1, -42, -150);
+    bot.go(3, 43, -157);
     init();
 }
 

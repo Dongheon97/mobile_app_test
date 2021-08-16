@@ -70,8 +70,8 @@ double_home = function(){
 }
 
 menu_ios = function(){
-    const xs = 4;
-    const ys = -33;
+    const xs = 5;
+    const ys = -32;
     for(var i=0; i<9; i++){
         bot.go(xs, ys+(7*i), -155);
         waitSync(1);

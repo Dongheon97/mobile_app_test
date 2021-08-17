@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, render_template
 import mysql.connector
 
 app = Flask(__name__)
@@ -16,8 +16,12 @@ def getMysqlConnection():
 	return mysql.connector.connect(**config)
 
 @app.route("/")
-def hello():
-	return "<h1>Hello World!</h1>"
+def index():
+	return render_template('index.html')
+
+@app.route("/page")
+def page():
+	return 'On Page'
 
 @app.route("/first")
 def first():

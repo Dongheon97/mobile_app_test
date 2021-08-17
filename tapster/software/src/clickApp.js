@@ -49,27 +49,43 @@ swipeUp = function(){
     console.log("Swipe Up");
 }
 
-home = function(){
-    //click(0, -42);
-    click(3, 43);
-    console.log("Home Button");
-}
-// Home button Double click
-double_home = function(){
-    bot.go(3, 43, -155);
+// iOS
+iHome = function(){
+    bot.go(-2, -40, -155);
     waitSync(0.2);
-    bot.go(3, 43, -167);
-    waitSync(0.20);
-    bot.go(3, 43, -155);
-    waitSync(0.20);
-    bot.go(3, 43, -167);
-    waitSync(0.20);
-    bot.go(3, 43, -155);
+    bot.go(-2, -40, -167);
+    waitSync(0.2);
+    bot.go(-2, -40, -155);
     init();
-    console.log("Home Button Double Click");
+    console.log("iOS Home");
 }
 
-menu_ios = function(){
+iMenu = function(){
+    bot.go(-2, -40, -157);
+    waitSync(0.2);
+    bot.go(-2, -40, -165);
+    waitSync(1);
+    bot.go(-2, -40, -157);
+    init();
+    console.log("iOS Menu")
+}
+
+// Home button Double click
+iDouble_home = function(){
+    bot.go(-2, -40, -155);
+    waitSync(0.2);
+    bot.go(-2, -40, -167);
+    waitSync(0.20);
+    bot.go(-2, -40, -155);
+    waitSync(0.20);
+    bot.go(-2, -40, -167);
+    waitSync(0.20);
+    bot.go(-2, -40, -155);
+    init();
+    console.log("iOS Double Home");
+}
+
+iCoordinates = function(){
     const xs = 5;
     const ys = -32;
     for(var i=0; i<9; i++){
@@ -78,23 +94,25 @@ menu_ios = function(){
     }
 }
 
-galaxy = function(){
-    bot.go(-25, 20, -150);
+// Android
+aHome = function(){
+    bot.go(0, -56, -150);
     waitSync(0.2);
-    bot.go(-25, 20, -163);
+    bot.go(0, -56, -163);
     waitSync(0.2);
-    bot.go(0, 20, -163);
+    bot.go(0, -56, -150);
     init();
-    console.log("Galaxy Menu");
+    console.log("Android Home")
 }
 
-
-launch = function(){
-    bot.go(3, 43, -157);
+aMenu = function(){
+    bot.go(-27, 25, -150);
     waitSync(0.2);
-    bot.go(3, 43, -165);
-    waitSync(1);
-    bot.go(3, 43, -157);
+    bot.go(-27, 25, -163);
+    waitSync(0.2);
+    bot.go(0, 25, -163);
     init();
+    console.log("Android Menu");
 }
+
 

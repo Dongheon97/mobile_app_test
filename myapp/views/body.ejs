@@ -1,8 +1,57 @@
-<h1>Loop it!</h1>
-<ul>
-    <% for(var i=0; i<length; i++){%>
-        <li>
-            <%= "Loop" + i %>
-        </li>
-    <% } %>
-</ul>
+<!--
+<input type="button" id="iOS" onclick="iOS_click('iOS');" value="iOS"/>
+<script>
+    function iOS_click(s){
+        console.log(s);   
+    }
+</script>
+<input type="button" id="ios" value="iOS" />
+<input type="button" id="android" value="Android" />
+
+<button onclick="iOS_click(click_ios);">
+            iOS
+            <script src="../router/execute.js"></script>
+            <script>
+                function iOS_click(s){
+                    console.log(s);
+                }
+            </script>
+</button>
+<button>
+    Android 
+</button>
+-->
+
+<button onclick="iOS_click(click_ios);">
+    iOS
+    <script src="../router/execute.js"></script>
+    <script>
+        function iOS_click(s){
+            console.log(s);
+        }
+    </script>
+</button>
+<button>
+    Android
+
+</button>
+
+<script src="../router/execute.js">
+    var t1 = document.getElementById('ios');
+    var t2 = document.getElementById('android');
+    function btn_listener(event){
+        switch(event.target.id){
+            case 'ios':
+                console.log("ios_exec");
+                break;
+            case 'android':
+                android_scenario();
+                colsole.log("android_exec");
+                break;
+        }
+    }
+    t1.addEventListener('click', btn_listener);
+    t2.addEventListener('click', btn_listener);
+</script>
+
+<link rel="stylesheet" href="css/button.css">

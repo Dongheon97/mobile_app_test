@@ -116,9 +116,10 @@ aMenu = function(){
 }
 
 module.exports = {
-	iHome,
-	iMenu,
-	iDouble_home,
-	aHome,
-	aMenu
+    click,
+    iMenu,
+    iHome,
+    iDouble_home,
+    aHome,
+    aMenu
 }

@@ -24,4 +24,4 @@ app.use(session({
 }));
 
 
-var router = require('./router/main')(app, fs);
+var src = require('./router/main')(app, fs);

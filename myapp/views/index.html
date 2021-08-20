@@ -1,3 +1,4 @@
+<!--
 <html>
     <head>
         <h1>Mobile Applicaton Testing!</h1>
@@ -13,9 +14,8 @@
         <input type="button" id="ios" value="iOS" />
         <input type="button" id="android" value="Android" />
         
-        <script
-        <script type="text/javascript" src="../router/main.js">
-            
+        
+        <script>            
             var t1 = document.getElementById('ios');
             var t2 = document.getElementById('android');
             function btn_listener(event){
@@ -24,7 +24,6 @@
                         console.log("ios_exec");
                         break;
                     case 'android':
-                        
                         console.log("android_exec");
                         break;
                 }
@@ -36,8 +35,8 @@
         <link rel="stylesheet" href="css/button.css">
     </body>
 </html>
+-->
 
-<!--
 <html>
     <head>
         <h1>Mobile Applicaton Testing!</h1>
@@ -50,22 +49,12 @@
     </head>
     <body>
         <br><br>
-        <button onclick="ios_click('iOS');">
+        <button onclick="location.href='http://172.17.0.1:3000/ios' ">
             iOS   
-            <script>
-                function ios_click(s){
-                    console.log(s);   
-                }
-            </script>
         </button>
-        <button onclick="android_click('Android');">
+        <button onclick="location.href='http://172.17.0.1:3000/android' ">
             Android
-            <script>
-                function android_click(s){
-                    console.log(s);
-                }
-            </script>
         </button>
         <link rel="stylesheet" href="css/button.css">
     </body>
-</html> -->
+</html> 

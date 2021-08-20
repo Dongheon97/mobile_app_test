@@ -34,17 +34,17 @@ swipeLeft = function(){
 }
 
 swipeDown = function(){
-    bot.go(0, -20, -163);
+    bot.go(0, +20, -163);
     waitSync(0.18);
-    bot.go(0, 20, -163);
+    bot.go(0, -20, -163);
     init();
     console.log("Swipe Down");
 }
 
 swipeUp = function(){
-    bot.go(0, 20, -163);
-    waitSync(0.18);
     bot.go(0, -20, -163);
+    waitSync(0.18);
+    bot.go(0, +20, -163);
     init();
     console.log("Swipe Up");
 }
@@ -68,6 +68,12 @@ iMenu = function(){
     bot.go(-2, -40, -157);
     init();
     console.log("iOS Menu")
+}
+
+iReset = function(){
+    iDouble_home();
+    waitSync(2);
+    swipeUp();
 }
 
 // Home button Double click
@@ -106,20 +112,33 @@ aHome = function(){
 }
 
 aMenu = function(){
-    bot.go(-27, 25, -150);
+    bot.go(-24, 25, -150);
     waitSync(0.2);
-    bot.go(-27, 25, -163);
+    bot.go(-24, 25, -163);
     waitSync(0.2);
     bot.go(0, 25, -163);
     init();
     console.log("Android Menu");
 }
 
+aReset = function(){
+    click(14, -58);
+    waitSync(1.5);
+    swipeUp();
+    //waitSync(1.5);
+    //click(0, -35);
+}
+
 module.exports = {
     click,
+    swipeDown,
+    swipeUp,
+    swipeLeft,
+    swipeRight,
     iMenu,
     iHome,
-    iDouble_home,
+    iReset,
     aHome,
-    aMenu
+    aMenu,
+    aReset
 }

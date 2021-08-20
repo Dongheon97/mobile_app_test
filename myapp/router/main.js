@@ -1,7 +1,10 @@
+var exec = require('../public/js/execute')
+/*
 var tapster = require('../tapster/src/clickApp.js');
 var waitSync = require('wait-sync');
+//const ios_exec = require('../public/js/execute.js');
 
-function ios_scenario(){
+ios_scenario = function(){
 	console.log("Start iOS Testing");
 	tapster.iMenu();
 	waitSync(3);
@@ -30,7 +33,7 @@ function ios_scenario(){
 	tapster.click(0, 2);
 }
 
-function android_scenairo(){
+android_scenairo = function(){
 	console.log("Start Android Testing");
 	tapster.aMenu();
 	waitSync(3);
@@ -59,6 +62,8 @@ function android_scenairo(){
 	tapster.click(0, 0);
 }
 
+*/
+
 module.exports = function(app, fs){
 	app.get('/', function(req, res){
 		res.render('index.html')
@@ -66,6 +71,19 @@ module.exports = function(app, fs){
 			title: "Result Page",
 			length: 5
 		});*/
+		
+	});
+
+	app.get('/ios', function(req, res){
+		console.log("@@@@@@@@@@@@ iOS Testing Start! @@@@@@@@@@@@");
+		exec.ios_scenario();
+		//console.log("@@@@@@@@@@@@ iOS Testing Finished! @@@@@@@@@@@@");
+	});
+
+	app.get('/android', function(req, res){
+		console.log("@@@@@@@@@@@@ Android Testing Start! @@@@@@@@@@@@");
+		exec.android_scenairo();
+		//console.log("@@@@@@@@@@@@ Android Testing Finished! @@@@@@@@@@@@");
 	});
 
 	app.get('/list', function(req, res){
@@ -114,6 +132,7 @@ module.exports = function(app, fs){
 							res.json(result);
 						})
 		});
+		res.end();
 	});
 	ios_scenario,
 	android_scenairo

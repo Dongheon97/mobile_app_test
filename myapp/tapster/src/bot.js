@@ -1,8 +1,6 @@
 five = require("johnny-five");
 kinematics = require("./kinematics");
-svgRead = require("./SVGReader");
-drawing = require("./draw");
-arc = require("./arc");
+
 motion = require("./motion");
 
 var express = require('express');
@@ -40,89 +38,6 @@ app.post('/go', jsonParser, function (req, res) {
     //go(x, y, z, 'none');
 
     setTimeout(function(){ res.send('OK\n') }, 250);
-  }
-
-});
-
-app.post('/circle', jsonParser, function (req, res) {
-  console.log('Circle!');
-  console.log(req.body);
-  if ((typeof req.body.x === 'undefined') ||
-     (typeof req.body.y === 'undefined') ||
-     (typeof req.body.z === 'undefined') ||
-     (typeof req.body.radius === 'undefined') ||
-     (typeof req.body.startAngle === 'undefined') ||
-     (typeof req.body.anticlockwise === 'undefined') ||
-     (typeof req.body.delay === 'undefined') ||
-     (typeof req.body.rotations === 'undefined')) {
-
-     res.status(400).send('Invalid request\n');
-
-  } else {
-    var centerX = req.body.x;
-    var centerY = req.body.y;
-    var centerZ = req.body.z;
-    var radius = req.body.radius;
-    var startAngle = req.body.startAngle;
-    var anticlockwise = req.body.anticlockwise;
-    var delay = req.body.delay;
-    var rotations = req.body.rotations;
-
-    // An array to save points on the arc
-    var points = arc(centerX, centerY, centerZ, radius, startAngle, startAngle, anticlockwise);
-
-    // Go to each point in the arc
-    for (var rotation = 0; rotation < rotations; rotation += 1) {
-      for (var i = 0; i < points.length; i += 1) {
-        setTimeout( function(point) {
-          go(point.x, point.y, point.z, "none")
-        },
-        i*delay + points.length*delay*rotation,
-        points[i]);
-      }
-    }
-
-    // Return
-    setTimeout(function(){ res.send('OK\n') }, points.length*delay*rotations );
-  }
-});
-
-
-app.post('/arc', jsonParser, function (req, res) {
-  console.log('Arc!');
-  console.log(req.body);
-  if ((typeof req.body.x === 'undefined') ||
-     (typeof req.body.y === 'undefined') ||
-     (typeof req.body.z === 'undefined') ||
-     (typeof req.body.radius === 'undefined') ||
-     (typeof req.body.startAngle === 'undefined') ||
-     (typeof req.body.endAngle === 'undefined') ||
-     (typeof req.body.anticlockwise === 'undefined') ||
-     (typeof req.body.delay === 'undefined')) {
-
-     res.status(400).send('Invalid request\n');
-
-  } else {
-    var centerX = req.body.x;
-    var centerY = req.body.y;
-    var centerZ = req.body.z;
-    var radius = req.body.radius;
-    var startAngle = req.body.startAngle;
-    var endAngle = req.body.endAngle;
-    var anticlockwise = req.body.anticlockwise;
-    var delay = req.body.delay;
-
-    // An array to save points on the arc
-    var points = arc(centerX, centerY, centerZ, radius, startAngle, endAngle, anticlockwise);
-
-    // Go to each point in the arc
-    var i;
-    for (i = 0; i < points.length; i += 1) {
-      setTimeout( function(point) { go(point.x, point.y, point.z, "none") }, i*delay, points[i]);
-    }
-
-    // Return
-    setTimeout(function(){ res.send('OK\n') }, i*delay );
   }
 
 });
@@ -181,21 +96,6 @@ k = new kinematics.Kinematics({
   f: config.f,
   re: config.re,
   rf: config.rf
-});
-
-svg = new svgRead.SVGReader({
-  baseWidth: config.baseWidth,
-  baseHeight: config.baseHeight,
-  drawHeight: config.drawHeight,
-  delay: config.delay,
-  defaultEaseType: config.defaultEaseType
-});
-
-draw = new drawing.Draw({
-  baseWidth: config.baseWidth,
-  baseHeight: config.baseHeight,
-  drawHeight: config.drawHeight,
-  defaultEaseType: config.defaultEaseType
 });
 
 board = new five.Board({

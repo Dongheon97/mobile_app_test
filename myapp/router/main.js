@@ -1,72 +1,7 @@
 var exec = require('../public/js/execute')
-/*
-var tapster = require('../tapster/src/clickApp.js');
-var waitSync = require('wait-sync');
-//const ios_exec = require('../public/js/execute.js');
-
-ios_scenario = function(){
-	console.log("Start iOS Testing");
-	tapster.iMenu();
-	waitSync(3);
-
-	// Enter CNU App
-	tapster.click(0, -24);
-	waitSync(5);
-
-	// 식단 조회
-	tapster.click(0, 11);
-	waitSync(3);
-
-	// 제2학생회관
-	tapster.click(0, 22);
-	waitSync(3);
-
-	// 뒤로 가기
-	tapster.click(23, 40);
-	waitSync(1);
-
-	// 뒤로 가기
-	tapster.click(23, 40);
-	waitSync(1);
-
-	// 학생증
-	tapster.click(0, 2);
-}
-
-android_scenairo = function(){
-	console.log("Start Android Testing");
-	tapster.aMenu();
-	waitSync(3);
-
-	// Enter CNU App
-	tapster.click(-12, -30);
-	waitSync(5);
-
-	// 식단 조회
-	tapster.click(0, 10);
-	waitSync(3);
-
-	// 제2학생회관
-	tapster.click(0, 28);
-	waitSync(3);
-
-	// 뒤로 가기
-	tapster.click(25, 46);
-	waitSync(1);
-
-	// 뒤로 가기
-	tapster.click(25, 46);
-	waitSync(1);
-
-	// 학생증
-	tapster.click(0, 0);
-}
-
-*/
-
 module.exports = function(app, fs){
 	app.get('/', function(req, res){
-		res.render('index.html')
+		res.render('index.html');
 		/*res.render('index', {
 			title: "Result Page",
 			length: 5
@@ -78,13 +13,21 @@ module.exports = function(app, fs){
 		console.log("@@@@@@@@@@@@ iOS Testing Start! @@@@@@@@@@@@");
 		exec.ios_scenario();
 		//console.log("@@@@@@@@@@@@ iOS Testing Finished! @@@@@@@@@@@@");
+		return res.redirect("../");
 	});
 
 	app.get('/android', function(req, res){
 		console.log("@@@@@@@@@@@@ Android Testing Start! @@@@@@@@@@@@");
 		exec.android_scenairo();
 		//console.log("@@@@@@@@@@@@ Android Testing Finished! @@@@@@@@@@@@");
+		return res.redirect("../");
 	});
+
+	app.get('/test', function(req, res){
+		console.log("video streaming test");
+		res.render('test.html');
+	})
+
 
 	app.get('/list', function(req, res){
 		fs.readFile( __dirname + "/../data/" + "result.json", 'utf8', function (err, data) {
@@ -134,6 +77,4 @@ module.exports = function(app, fs){
 		});
 		res.end();
 	});
-	ios_scenario,
-	android_scenairo
 }

@@ -8,11 +8,11 @@ ios_scenario = function(){
 
 	// Enter CNU App
 	tapster.click(0, -24);
-	waitSync(5);
+	waitSync(7);
 
 	// 식단 조회
 	tapster.click(0, 11);
-	waitSync(3);
+	waitSync(4);
 
 	// 제2학생회관
 	tapster.click(0, 22);
@@ -37,11 +37,11 @@ android_scenairo = function(){
 
 	// Enter CNU App
 	tapster.click(-12, -30);
-	waitSync(5);
+	waitSync(7);
 
 	// 식단 조회
 	tapster.click(0, 10);
-	waitSync(3);
+	waitSync(4);
 
 	// 제2학생회관
 	tapster.click(0, 28);

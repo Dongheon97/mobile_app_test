@@ -12,7 +12,8 @@
     "mysql": "^2.18.1",
     "svg-path-parser": "^1.1.0",
     "wait-sync": "^1.0.1",
-    "xml2js": "^0.4.23"
+    "xml2js": "^0.4.23",
+    "opencv.js": "1.2.1"
   },
   "devDependencies": {},
   "scripts": {

@@ -8,7 +8,7 @@
 <!--script async src="./opencv.js"></script-->
 
 <body onload="setSize()">
-    <button id="toggleStream" onclick="toggleStream()">Play</button>
+    <button id="toggleStream" onclick="toggleStream(); cvtGray()">Play</button>
     <button id="cvtGray" onclick="cvtGray()" style="visibility: hidden;">Convert to Gray</button>
     <br>
     <br>
@@ -35,7 +35,7 @@
     };
     const video = document.getElementById("video");
     const canvas = document.getElementById('output');
-    canvas.width = width; canvas.height = height;
+    canvas.width = video.width; canvas.height = video.height;
 
     function successCallback(stream) {
         video.width = width; video.height = height;//prevent Opencv.js error.

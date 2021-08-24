@@ -1,4 +1,6 @@
-var exec = require('../public/js/execute')
+
+const exec = require('../public/javascript/execute')
+
 module.exports = function(app, fs){
 	app.get('/', function(req, res){
 		res.render('index.html');
@@ -6,27 +8,71 @@ module.exports = function(app, fs){
 			title: "Result Page",
 			length: 5
 		});*/
-		
 	});
 
-	app.get('/ios', function(req, res){
+	app.get('/test1', function(req,res){
+		const spawn = require('child_process').spawn;
+		const result = spawn('python3', ['record.py']);
+		console.log("record start!")
+		
+		result.stdout.on('data', function(data){
+			console.log(data.toString());
+		});
+		result.stderr.on('data', function(data){
+			console.log(data.toString());
+		});
+		res.end();
+	}); 
+
+	app.get('/test2', function(req,res){
+		var nStart = new Date().getTime();
+		const { PythonShell } = require('python-shell');
+		let option = {
+			mode: 'text',
+			pythonPath: '/usr/bin/python3',
+			pythonOptions: ['-u'],
+			scriptPath: '../public/python/'
+		}
+		
+		PythonShell.PythonShell.run('record.py', options, function(err, results){
+			console.log(results);
+			var nEnd = new Date().getTime();
+			console.log(nEnd-nStart +"ms");
+		})
+		
+		return res.send('END');
+	}); 
+
+
+
+
+
+	app.get('/ios', function(req, res){		
 		console.log("@@@@@@@@@@@@ iOS Testing Start! @@@@@@@@@@@@");
 		exec.ios_scenario();
-		//console.log("@@@@@@@@@@@@ iOS Testing Finished! @@@@@@@@@@@@");
 		return res.redirect("../");
+
 	});
 
 	app.get('/android', function(req, res){
 		console.log("@@@@@@@@@@@@ Android Testing Start! @@@@@@@@@@@@");
 		exec.android_scenairo();
-		//console.log("@@@@@@@@@@@@ Android Testing Finished! @@@@@@@@@@@@");
 		return res.redirect("../");
 	});
 
-	app.get('/test', function(req, res){
+	app.get('/stream', function(req, res){
 		console.log("video streaming test");
 		res.render('test.html');
 	})
+
+
+
+
+
+
+
+
+
 
 
 	app.get('/list', function(req, res){
@@ -41,6 +87,7 @@ module.exports = function(app, fs){
 			var appNames = JSON.parse(data);
 			res.json(appNames[req.params.num]);
 		});
+		res.end();
 	});
 	
 	app.post('/add/:num', function(req, res){

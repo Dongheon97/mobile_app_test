@@ -1,8 +1,7 @@
-<!--
 <html>
     <head>
         <h1>Mobile Applicaton Testing!</h1>
-        <script>
+        <script async src="https://docs.opencv.org/3.4/opencv.js">
            console.log("CNU_CSE 201702052 Dongheon");
            console.log("Mobile Application Testing");
         </script>
@@ -10,51 +9,21 @@
         
     </head>
     <body>
-        <br><br>
-        <input type="button" id="ios" value="iOS" />
-        <input type="button" id="android" value="Android" />
-        
-        
-        <script>            
-            var t1 = document.getElementById('ios');
-            var t2 = document.getElementById('android');
-            function btn_listener(event){
-                switch(event.target.id){
-                    case 'ios':
-                        console.log("ios_exec");
-                        break;
-                    case 'android':
-                        console.log("android_exec");
-                        break;
-                }
-            }
-            t1.addEventListener('click', btn_listener);
-            t2.addEventListener('click', btn_listener);
-        </script>
-        
-        <link rel="stylesheet" href="css/button.css">
-    </body>
-</html>
--->
-
-<html>
-    <head>
-        <h1>Mobile Applicaton Testing!</h1>
-        <script>
-           console.log("CNU_CSE 201702052 Dongheon");
-           console.log("Mobile Application Testing");
-        </script>
-        <link rel="stylesheet" type="text/css" href="css/style.css">
-        
-    </head>
-    <body>
-        <br><br>
-        <button onclick="location.href='http://172.17.0.1:3000/ios' ">
+        <button onclick="location.href='./ios'; " >
             iOS   
         </button>
-        <button onclick="location.href='http://172.17.0.1:3000/android' ">
+        <button onclick="location.href='./android' ">
             Android
         </button>
+        <button onclick="location.href='./test1' ">
+            test1
+        </button>
+        <button onclick="location.href='./test2' ">
+            test2
+        </button>
+        <script>
+
+        </script>
         <link rel="stylesheet" href="css/button.css">
     </body>
 </html> 

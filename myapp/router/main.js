@@ -12,7 +12,7 @@ module.exports = function(app, fs){
 
 	app.get('/test1', function(req,res){
 		const spawn = require('child_process').spawn;
-		const result = spawn('python3', ['record.py']);
+		const result = spawn('python3', ['/home/kodo/dongheon/mobile_app_test/myapp/public/python/record.py']);
 		console.log("record start!")
 		
 		result.stdout.on('data', function(data){
@@ -26,20 +26,21 @@ module.exports = function(app, fs){
 
 	app.get('/test2', function(req,res){
 		var nStart = new Date().getTime();
-		const { PythonShell } = require('python-shell');
+		let { PythonShell } = require('python-shell');
 		let option = {
 			mode: 'text',
 			pythonPath: '/usr/bin/python3',
 			pythonOptions: ['-u'],
 			scriptPath: '../public/python/'
 		}
-		
+		/*
 		PythonShell.PythonShell.run('record.py', options, function(err, results){
 			console.log(results);
 			var nEnd = new Date().getTime();
 			console.log(nEnd-nStart +"ms");
-		})
-		
+		});
+		*/
+
 		return res.send('END');
 	}); 
 

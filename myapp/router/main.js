@@ -1,5 +1,6 @@
 
 const exec = require('../public/javascript/execute')
+const waitSync = require('wait-sync')
 
 module.exports = function(app, fs){
 	app.get('/', function(req, res){
@@ -13,15 +14,29 @@ module.exports = function(app, fs){
 	app.get('/test1', function(req,res){
 		const spawn = require('child_process').spawn;
 		const result = spawn('python3', ['/home/kodo/dongheon/mobile_app_test/myapp/public/python/record.py']);
+		if(result){
+			console.log("connected");
+		}
 		console.log("record start!")
-		
+		waitSync(5);
 		result.stdout.on('data', function(data){
 			console.log(data.toString());
 		});
 		result.stderr.on('data', function(data){
 			console.log(data.toString());
 		});
-		res.end();
+		try{
+			console.log("start");
+			exec.ios_scenario();
+			console.log("end");
+		}catch(err){
+			console.log(err);
+		}
+		
+
+		
+		return res.redirect("../");
+		//res.end();
 	}); 
 
 	app.get('/test2', function(req,res){
@@ -45,9 +60,6 @@ module.exports = function(app, fs){
 	}); 
 
 
-
-
-
 	app.get('/ios', function(req, res){		
 		console.log("@@@@@@@@@@@@ iOS Testing Start! @@@@@@@@@@@@");
 		exec.ios_scenario();
@@ -65,14 +77,6 @@ module.exports = function(app, fs){
 		console.log("video streaming test");
 		res.render('test.html');
 	})
-
-
-
-
-
-
-
-
 
 
 

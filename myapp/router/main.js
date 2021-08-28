@@ -41,20 +41,20 @@ module.exports = function(app, fs){
 	app.get('/test2', function(req,res){
 		var nStart = new Date().getTime();
 		let { PythonShell } = require('python-shell');
-		let option = {
+		let options = {
 			mode: 'text',
-			pythonPath: '/usr/bin/python3',
+			//pythonPath: '/usr/bin/python3',
 			pythonOptions: ['-u'],
-			scriptPath: '../public/python/'
-		}
-		/*
-		PythonShell.PythonShell.run('record.py', options, function(err, results){
+			scriptPath: 'home/kodo/dongheon/mobile_app_test/myapp/public/python/'
+		};
+		
+		PythonShell.run('./record.py', options, function(err, results) {
 			console.log(results);
 			var nEnd = new Date().getTime();
 			console.log(nEnd-nStart +"ms");
 		});
-		*/
-		return res.send('END');
+		
+		return res.redirect("../");
 	}); 
 
 

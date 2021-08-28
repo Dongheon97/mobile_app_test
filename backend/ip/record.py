@@ -1,34 +1,40 @@
 import cv2
-import time
 
 cap = cv2.VideoCapture(0)
-cap.set(3, 600) # 윈도우 크기
-cap.set(4, 800)
-fc = 30.0
-codec = cv2.VideoWriter_fourcc(*'mp4v')
-count = 99
-while(cap.isOpened()):
-    
-    if count != time.strftime('%H',time.localtime(time.time())): # 시간이 바뀌면 영상파일을 새로 만든다. (시간으로 감지)
-        
-        count = time.strftime('%H',time.localtime(time.time()))
-        print('시간 변경 감지')
-        
-        out = cv2.VideoWriter(time.strftime('./video/%Y-%m-%d-%H-%M',time.localtime(time.time()))+'.mp4', codec, fc, (int(cap.get(3)), int(cap.get(4))))
-        print('파일 생성:',time.strftime('./video/%Y-%m-%d-%H-%M',time.localtime(time.time()))+'.mp4')
-    
-    ret, frame = cap.read()
-    #frame = cv2.flip(frame,1) # 화면 반전 0: 상하, 1: 좌우
-    # 시간 텍스트 출력
-    #cv2.putText(frame, text=time.strftime('%Y-%m-%d %H:%M:%S',time.localtime(time.time())), org=(30, 450), fontFace=cv2.FONT_HERSHEY_SIMPLEX, fontScale=1, color=(0,255,0), thickness=2)
-    
-    if ret==True:
-        #cv2.imshow('Record&Save', frame)
-        out.write(frame)
-        if cv2.waitKey(1) & 0xFF == ord('q'):
-            break
-    else:
+# 해상도 변경
+fc=30.0
+cap.set(cv2.CAP_PROP_FRAME_WIDTH, 800)
+cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 600)
+cap.set(cv2.CAP_PROP_FPS, fc)
+
+# 디스플레이에 맞는 크기 설정하기
+ret, src = cap.read()
+gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)
+
+h, w = gray.shape
+print(gray.shape)
+w_start = 0
+w_end = 0
+for i in range(w):
+    if (gray[0][i] != 0):
+        w_start = i
         break
+for j in range(w):
+    if (gray[h-1][w-1-j] != 0):
+        w_end = w-1-j
+        break
+
+
+codec = cv2.VideoWriter_fourcc(*'mp4v')
+out = cv2.VideoWriter('./video/test.mp4', codec, fc, (w_end-w_start, h))
+# streaming
+while True:
+    ret, frame = cap.read()
     
-cap.release()
-cv2.destroyAllWindows()
+    # cutting image
+    dst = frame[:, w_start+1:w_end+1]
+    print(dst.shape)
+    out.write(dst)
+    cv2.imshow("video", dst)
+    cv2.waitKey(1)
+

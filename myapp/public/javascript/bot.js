@@ -46,12 +46,13 @@ app.post('/go', jsonParser, function (req, res) {
 
 // set the port of our application
 // process.env.PORT lets the port be set by Heroku
+/* 
 var port = process.env.PORT || 8080;
 
 app.listen(port, function () {
   console.log('Tapster web server listening on port ' + port);
 });
-
+*/
 
 //If a filepath is specified, load that config
 //Otherwise, resort to the default config
@@ -63,12 +64,12 @@ if (process.argv[2]) {
     console.log("Config found and loaded.");
   } catch (e) {
     console.log("Config not found. Loading default.");
-    var config = require("../config.js");
+    var config = require("./config.js");
   }
 }
 else {
   console.log("Config not specified. Loading default.");
-  var config = require("../config.js");
+  var config = require("./config.js");
 }
 
 //Alternate config loading code

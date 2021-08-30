@@ -1,8 +1,11 @@
-var tapster = require('../../tapster/src/clickApp.js');
+var tapster = require('./clickApp.js');
 var waitSync = require('wait-sync');
 
 ios_scenario = function(){
-	
+	// test move for stable executing
+	tapster.swipeUp();
+	waitSync(2);
+
 	tapster.iMenu();
 	waitSync(5);
 
@@ -35,7 +38,10 @@ ios_scenario = function(){
 }
 
 android_scenairo = function(){
-	
+	// test move for stable executing
+	tapster.swipeUp();
+	waitSync(2);
+
 	tapster.aMenu();
 	waitSync(5);
 

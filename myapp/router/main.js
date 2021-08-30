@@ -28,7 +28,7 @@ module.exports = function(app, fs){
 		});
 		try{
 			console.log("start");
-			waitSync(5);
+			waitSync(3);
 			exec.ios_scenario();
 			console.log("end");
 		}catch(err){
@@ -37,26 +37,6 @@ module.exports = function(app, fs){
 		return res.redirect("../");
 		//res.end();
 	}); 
-
-	app.get('/test2', function(req,res){
-		var nStart = new Date().getTime();
-		let { PythonShell } = require('python-shell');
-		let options = {
-			mode: 'text',
-			//pythonPath: '/usr/bin/python3',
-			pythonOptions: ['-u'],
-			scriptPath: 'home/kodo/dongheon/mobile_app_test/myapp/public/python/'
-		};
-		
-		PythonShell.run('./record.py', options, function(err, results) {
-			console.log(results);
-			var nEnd = new Date().getTime();
-			console.log(nEnd-nStart +"ms");
-		});
-		
-		return res.redirect("../");
-	}); 
-
 
 	app.get('/ios', function(req, res){		
 		console.log("@@@@@@@@@@@@ iOS Testing Start! @@@@@@@@@@@@");

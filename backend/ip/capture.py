@@ -1,36 +1,27 @@
-
 import cv2
 
-cap = cv2.VideoCapture(0)
-# 해상도 변경
-cap.set(cv2.CAP_PROP_FRAME_WIDTH, 800)
-cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 600)
-cap.set(cv2.CAP_PROP_FPS, 30)
+def main(path):
+    # video file path
+    vidcap = cv2.VideoCapture(path)
+    frame = 0
+    get_image_count = 1
 
-# 디스플레이에 맞는 크기 설정하기
-ret, src = cap.read()
-gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)
-
-h, w = gray.shape
-print(gray.shape)
-w_start = 0
-w_end = 0
-for i in range(w):
-    if (gray[0][i] != 0):
-        w_start = i
-        break
-for j in range(w):
-    if (gray[h-1][w-1-j] != 0):
-        w_end = w-1-j
-        break
-
-# streaming
-while True:
-    ret, frame = cap.read()
+    while(vidcap.isOpened()):
+        ret, image = vidcap.read()
     
-    # cutting image
-    dst = frame[:, w_start+1:w_end+1]
-    
-    cv2.imshow("video", dst)
-    cv2.waitKey(1)
+        if(int(vidcap.get(1)) % 3 == 0):
+            print('Saved frame number : ' + str(int(vidcap.get(1))))
 
+            cv2.imwrite('video/capture/%d.PNG' % get_image_count, image)
+            get_image_count += 1
+            
+        # check end of Video
+        frame += 1
+        if(frame > 1801):
+            break
+
+    vidcap.release()
+
+if __name__ == '__main__':
+    path = 'video/0.mp4'
+    main(path)

@@ -72,7 +72,7 @@ iMenu = function(){
 
 iReset = function(){
     iDouble_home();
-    waitSync(2);
+    waitSync(1.7);
     swipeUp();
 }
 
@@ -123,7 +123,7 @@ aMenu = function(){
 
 aReset = function(){
     click(14, -58);
-    waitSync(1.5);
+    waitSync(1.7);
     swipeUp();
     //waitSync(1.5);
     //click(0, -35);

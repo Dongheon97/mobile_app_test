@@ -12,10 +12,10 @@ module.exports = function(app, fs){
 	});
 
 	// 파일 이름 받아와서 Speed Index 수행하기!
-	app.get('/test1', function(req,res){
+	app.get('/ios', function(req,res){
 		const spawn = require('child_process').spawn;
 		// change your file path
-		const result = spawn('python3', ['/home/kodo/dongheon/mobile_app_test/myapp/public/python/record.py']);
+		const result = spawn('python3', ['public/python/record.py']);
 		if(result){
 			console.log("connected");
 		}
@@ -38,16 +38,30 @@ module.exports = function(app, fs){
 		//res.end();
 	}); 
 
-	app.get('/ios', function(req, res){		
-		console.log("@@@@@@@@@@@@ iOS Testing Start! @@@@@@@@@@@@");
-		exec.ios_scenario();
-		return res.redirect("../");
-	});
-
 	app.get('/android', function(req, res){
-		console.log("@@@@@@@@@@@@ Android Testing Start! @@@@@@@@@@@@");
-		exec.android_scenairo();
+		const spawn = require('child_process').spawn;
+		// change your file path
+		const result = spawn('python3', ['/home/kodo/dongheon/mobile_app_test/myapp/public/python/record.py']);
+		if(result){
+			console.log("connected");
+		}
+		console.log("record start!")
+		result.stdout.on('data', function(data){
+			console.log(data.toString());
+		});
+		result.stderr.on('data', function(data){
+			console.log(data.toString());
+		});
+		try{
+			console.log("start");
+			waitSync(3);
+			exec.android_scenario();
+			console.log("end");
+		}catch(err){
+			console.log(err);
+		}
 		return res.redirect("../");
+		//res.end();
 	});
 
 	app.get('/stream', function(req, res){

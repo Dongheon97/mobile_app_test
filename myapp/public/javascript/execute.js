@@ -7,15 +7,15 @@ ios_scenario = function(){
 	waitSync(2);
 
 	tapster.iMenu();
-	waitSync(5);
+	waitSync(7);
 
 	// Enter CNU App
 	tapster.click(0, -24);
-	waitSync(10);
+	waitSync(12);
 
 	// 식단 조회
 	tapster.click(0, 13);
-	waitSync(10);
+	waitSync(12);
 
 	// 제2학생회관
 	tapster.click(0, 22);
@@ -23,11 +23,11 @@ ios_scenario = function(){
 
 	// 뒤로 가기
 	tapster.click(24, 40);
-	waitSync(3);
+	waitSync(6);
 
 	// 뒤로 가기
 	tapster.click(24, 40);
-	waitSync(3);
+	waitSync(6);
 
 	// 학생증
 	tapster.click(0, 2);
@@ -37,21 +37,21 @@ ios_scenario = function(){
 	tapster.iReset();
 }
 
-android_scenairo = function(){
+android_scenario = function(){
 	// test move for stable executing
-	tapster.swipeUp();
+	tapster.swipeLeft();
 	waitSync(2);
 
 	tapster.aMenu();
-	waitSync(5);
+	waitSync(7);
 
 	// Enter CNU App
 	tapster.click(-12, -30);
-	waitSync(10);
+	waitSync(12);
 
 	// 식단 조회
 	tapster.click(0, 12);
-	waitSync(10);
+	waitSync(12);
 
 	// 제2학생회관
 	tapster.click(0, 28);
@@ -59,11 +59,11 @@ android_scenairo = function(){
 
 	// 뒤로 가기
 	tapster.click(27, 46);
-	waitSync(3);
+	waitSync(6);
 
 	// 뒤로 가기
 	tapster.click(27, 46);
-	waitSync(3);
+	waitSync(6);
 
 	// 학생증
 	tapster.click(0, 0);
@@ -74,6 +74,6 @@ android_scenairo = function(){
 }
 
 module.exports = {
-    android_scenairo,
+    android_scenario,
     ios_scenario
 }

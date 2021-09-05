@@ -1,5 +1,5 @@
 
-const exec = require('../public/javascript/execute')
+const exe = require('../public/javascript/execute')
 const waitSync = require('wait-sync')
 
 module.exports = function(app, fs){
@@ -29,7 +29,7 @@ module.exports = function(app, fs){
 		try{
 			console.log("start");
 			waitSync(3);
-			exec.ios_scenario();
+			exe.ios_scenario();
 			console.log("end");
 		}catch(err){
 			console.log(err);
@@ -55,7 +55,7 @@ module.exports = function(app, fs){
 		try{
 			console.log("start");
 			waitSync(3);
-			exec.android_scenario();
+			exe.android_scenario();
 			console.log("end");
 		}catch(err){
 			console.log(err);

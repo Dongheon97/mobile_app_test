@@ -4,7 +4,7 @@ def main(path):
     # video file path
     vidcap = cv2.VideoCapture(path)
     frame = 0
-    get_image_count = 1
+    get_image_count = 0
 
     while(vidcap.isOpened()):
         ret, image = vidcap.read()
@@ -17,7 +17,7 @@ def main(path):
             
         # check end of Video
         frame += 1
-        if(frame > 1801):
+        if(frame > 2500):
             break
 
     vidcap.release()

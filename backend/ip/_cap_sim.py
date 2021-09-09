@@ -20,7 +20,7 @@ while(vidcap.isOpened()):
         get_image_count += 1
     
     video_frame += 1
-    if(video_frame > 1801):
+    if(video_frame > 2500):
         break
 
 vidcap.release()

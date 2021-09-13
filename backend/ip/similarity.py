@@ -7,13 +7,15 @@ import os
 def main():
     timeline = []
     
-    end_load = 0
-    start_load = 0
-    temp = 0
+    end_load = []
+    start_load = []
+    temp_end = 0
+    temp_start = 0
 
     #img_list = sorted(os.listdir('video/capture'))
     img_list = os.listdir('video/capture')
     ps = 0
+
     for i in range(len(img_list)-1, 0, -1):
         current = i
         previous = i-1
@@ -31,43 +33,25 @@ def main():
 
         if (s < 0.95):
             
-            if (end_load == 0):
-                end_load = end_time
-                print(end_load)
+            if (temp_end == 0):
+                temp_end = end_time
+                print(temp_end)
+                end_load.append(temp_end)
             else:
-                if (end_load-end_time > 5):
-                    end_load = 0
+                if (temp_end-end_time > 5):
+                    temp_end = 0
             #print("SSIM : %.2f, Time : %.1f" %(s, start_time))
         
         else:
             if(ps < 0.95):
-                print("         ",start_load-start_time)
-                if(start_load-start_time > 5):
-                    start_load = 0
-                else:
-                    start_load = start_time
-                    print("            ", start_load)    
-                
+                #print("                  ", start_time)
+                if(temp_start - start_time):
+                    temp_start = start_time
         ps = s
+    print(end_load)
 
     
 
 if __name__ == '__main__':
     main()
-    '''img1 = cv2.imread('video/capture/55.PNG', cv2.IMREAD_GRAYSCALE)
-    img2 = cv2.imread('video/capture/54.PNG', cv2.IMREAD_GRAYSCALE)
-    print(ssim(img1, img2))'''
-
-
-'''if (ps < 0.95):  
-            #start_load = start_time
-            start_load = end_load
-            if(start_load == 0):
-                start_load = start_time
-                print("                    ", start_load)
-                #temp = [start_load, end_load]
-                #timeline.append(temp)
-            
-            else:
-                if(start_load - start_time > 5):
-                    start_load = 0'''
+    

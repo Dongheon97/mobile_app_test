@@ -6,11 +6,9 @@ import os
 
 def main():
     timeline = []
-    
     end_load = []
     start_load = []
     temp_end = 0
-    temp_start = 0
 
     #img_list = sorted(os.listdir('video/capture'))
     img_list = os.listdir('video/capture')
@@ -32,24 +30,41 @@ def main():
         #print(end_time, "           ", s, "                 ", ps)
 
         if (s < 0.95):
-            
             if (temp_end == 0):
                 temp_end = end_time
-                print(temp_end)
                 end_load.append(temp_end)
             else:
                 if (temp_end-end_time > 5):
                     temp_end = 0
             #print("SSIM : %.2f, Time : %.1f" %(s, start_time))
         
+        
         else:
             if(ps < 0.95):
-                #print("                  ", start_time)
-                if(temp_start - start_time):
-                    temp_start = start_time
+                start_load.append(start_time)
+                   
         ps = s
-    print(end_load)
 
+    # post processing of start_load	
+    temp_lst = []
+    for i in range(len(start_load)-1):
+        if (i==0 or start_load[i] - start_load[i+1] < 5):
+            temp_lst.append(start_load[i])		
+    
+    for i in range(len(temp_lst)):
+        start_load.remove(temp_lst[i])
+
+    try:
+        if(len(end_load) == len(start_load)):
+            for i in range(len(end_load), 0, -1):
+                print(end_load[i-1], "-", start_load[i-1])
+                timeline.append(round(end_load[i-1]-start_load[i-1], 2))
+    except Exception as e:
+        print(e)
+
+    print(end_load)
+    print(start_load)
+    print(timeline)
     
 
 if __name__ == '__main__':

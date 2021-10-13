@@ -50,7 +50,7 @@ def main():
     out = cv2.VideoWriter(path, codec, fc, (800, 600))
     while(cap.isOpened() or current < next):
         print(time.time()-start)
-        if (time.time()-start > 70): # 시간이 바뀌면 영상파일을 새로 만든다. (시간으로 감지)
+        if (time.time()-start > 130): # 시간이 바뀌면 영상파일을 새로 만든다. (시간으로 감지)
             start = time.time()
             current+=1
             print('새로운 파일 저장 시작')

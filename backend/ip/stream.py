@@ -1,7 +1,7 @@
 
 import cv2
 
-cap = cv2.VideoCapture(0)
+cap = cv2.VideoCapture(2)
 # 해상도 변경
 cap.set(cv2.CAP_PROP_FRAME_WIDTH, 1280)
 cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 760)
@@ -30,6 +30,9 @@ while True:
     
     # cutting image
     dst = frame[:, w_start+1:w_end+1]
-
+    print(dst.shape)
+    
     cv2.imshow("video", frame)
     cv2.waitKey(1)
+
+# 351 / 407

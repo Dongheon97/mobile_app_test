@@ -13,10 +13,11 @@ def main(path):
             print('Saved frame number : ' + str(int(vidcap.get(1))))
 
             cv2.imwrite('video/capture/%d.PNG' % count, image)
+            
             count += 1
 
     vidcap.release()
 
 if __name__ == "__main__":
-    path = 'video/0.mp4'
-    main()
+    path = 'video/0.avi'
+    main(path)

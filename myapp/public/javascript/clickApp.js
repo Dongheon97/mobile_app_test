@@ -42,9 +42,9 @@ swipeDown = function(){
 }
 
 swipeUp = function(){
-    bot.go(0, -20, -163);
-    waitSync(0.18);
-    bot.go(0, +20, -163);
+    bot.go(0, -20, -167);
+    waitSync(0.2);
+    bot.go(0, +20, -167);
     init();
     console.log("Swipe Up");
 }

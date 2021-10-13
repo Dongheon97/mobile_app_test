@@ -1,5 +1,5 @@
 
-const exe = require('../public/javascript/execute')
+const chrome = require('../public/javascript/chrome.js')
 const waitSync = require('wait-sync')
 
 module.exports = function(app, fs){
@@ -12,7 +12,7 @@ module.exports = function(app, fs){
 	});
 
 	// 파일 이름 받아와서 Speed Index 수행하기!
-	app.get('/ios', function(req,res){
+	app.get('/chrome', function(req,res){
 		const spawn = require('child_process').spawn;
 		// change your file path
 		const result = spawn('python3', ['public/python/record.py']);
@@ -29,7 +29,7 @@ module.exports = function(app, fs){
 		try{
 			console.log("start");
 			waitSync(3);
-			exe.ios_scenario();
+			chrome.chrome_scenario();
 			console.log("end");
 		}catch(err){
 			console.log(err);
@@ -37,7 +37,7 @@ module.exports = function(app, fs){
 		return res.redirect("../");
 		//res.end();
 	}); 
-
+/*
 	app.get('/android', function(req, res){
 		const spawn = require('child_process').spawn;
 		// change your file path
@@ -63,7 +63,7 @@ module.exports = function(app, fs){
 		return res.redirect("../");
 		//res.end();
 	});
-
+*/
 	app.get('/stream', function(req, res){
 		console.log("video streaming test");
 		res.render('test.html');

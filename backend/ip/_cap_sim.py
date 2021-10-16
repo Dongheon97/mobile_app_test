@@ -4,37 +4,50 @@ import numpy as np
 import cv2
 import os
 
-# video file path
-vidcap = cv2.VideoCapture('video/0.mp4')
+def main(loc):
+    timeline = []
+    temp = 0
+    path = '/home/kodo/Desktop/video/'+loc
+    #img_list = sorted(os.listdir('video/capture'))
+    img_list = os.listdir(path)
+    ps = 0
 
-video_frame = 0
-get_image_count = 1
+    for i in range(len(img_list)-1, 0, -1):
+        current = i
+        previous = i-1
+        #print(previous)
+        cur_img = cv2.imread(path + str(current) + '.PNG', cv2.IMREAD_GRAYSCALE)
+        prev_img = cv2.imread(path + str(previous) + '.PNG', cv2.IMREAD_GRAYSCALE)
+        
+        # SSIM = (2Ux*Uy + c1)*(2Rxy + c2) / (Ux**2 + Uy**2 + c1)*(Rx**2 + Ry**2 + c2)
+        s = ssim(cur_img, prev_img)
 
-while(vidcap.isOpened()):
-    ret, image = vidcap.read()
-    
-    if(int(vidcap.get(1)) % 3 == 0):
-        print('Saved frame number : ' + str(int(vidcap.get(1))))
+        end_time = float(current+1)/10
+        start_time = float(current)/10
 
-        cv2.imwrite('video/capture/%d.PNG' % get_image_count, image)
-        get_image_count += 1
-    
-    video_frame += 1
-    if(video_frame > 2500):
-        break
+        #print(end_time, "           ", s, "                 ", ps)
 
-vidcap.release()
+        if (s < 0.95):
+            timeline.append(end_time)
+#print(end_time)
+            #if (end_time - temp > 4.9):
+                #print('-----------')
+                #temp = end_time
+                #timeline.append(temp)
+            #else:
+                #if (temp-end_time > 4):
+                    #temp = 0
+            #print("SSIM : %.2f, Time : %.1f" %(s, start_time))
+        
+        
+        ps = s
 
-#img_list = os.listdir('video/capture')
-#print(img_list)    
-    
-for i in range(get_image_count, 1, -1):
-    current = i
-    previous = i-1
-    cur_img = cv2.imread('video/capture/' + str(current) + '.PNG', cv2.IMREAD_GRAYSCALE)
-    prev_img = cv2.imread('video/capture/' + str(previous) + '.PNG', cv2.IMREAD_GRAYSCALE)
+    print(timeline)
 
-    # calculate image similarity
-    # SSIM = (2Ux*Uy + c1)*(2Rxy + c2) / (Ux**2 + Uy**2 + c1)*(Rx**2 + Ry**2 + c2)
-    s = ssim(cur_img, prev_img)    
-    print("SSIM : %.2f" %(s))
+if __name__ == '__main__':
+    count = 1
+    while(count<11):
+        print(count)
+        loc = 'test'+str(int(count))+'/'
+        main(loc)
+        count += 1

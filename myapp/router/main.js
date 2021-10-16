@@ -1,5 +1,7 @@
 
-const chrome = require('../public/javascript/chrome.js')
+const chrome = require('./chrome.js')
+const naver = require('./naver.js')
+const melon = require('./melon.js')
 const waitSync = require('wait-sync')
 
 module.exports = function(app, fs){
@@ -12,7 +14,7 @@ module.exports = function(app, fs){
 	});
 
 	// 파일 이름 받아와서 Speed Index 수행하기!
-	app.get('/chrome', function(req,res){
+	app.get('/melon', function(req,res){
 		const spawn = require('child_process').spawn;
 		// change your file path
 		const result = spawn('python3', ['public/python/record.py']);
@@ -29,7 +31,7 @@ module.exports = function(app, fs){
 		try{
 			console.log("start");
 			waitSync(3);
-			chrome.chrome_scenario();
+			melon.scenario();
 			console.log("end");
 		}catch(err){
 			console.log(err);
@@ -38,10 +40,10 @@ module.exports = function(app, fs){
 		//res.end();
 	}); 
 /*
-	app.get('/android', function(req, res){
+	app.get('/naver', function(req, res){
 		const spawn = require('child_process').spawn;
 		// change your file path
-		const result = spawn('python3', ['/home/kodo/dongheon/mobile_app_test/myapp/public/python/record.py']);
+		const result = spawn('python3', ['public/python/record.py']);
 		if(result){
 			console.log("connected");
 		}
@@ -55,7 +57,7 @@ module.exports = function(app, fs){
 		try{
 			console.log("start");
 			waitSync(3);
-			exe.android_scenario();
+			naver.scenario();
 			console.log("end");
 		}catch(err){
 			console.log(err);
@@ -63,13 +65,12 @@ module.exports = function(app, fs){
 		return res.redirect("../");
 		//res.end();
 	});
-*/
+
 	app.get('/stream', function(req, res){
 		console.log("video streaming test");
 		res.render('test.html');
 	})
-
-
+*/
 
 	app.get('/list', function(req, res){
 		fs.readFile( __dirname + "/../data/" + "result.json", 'utf8', function (err, data) {

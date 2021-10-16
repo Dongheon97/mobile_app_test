@@ -4,22 +4,22 @@ import numpy as np
 import cv2
 import os
 
-def main():
+def main(loc):
     timeline = []
     end_load = []
     start_load = []
     temp_end = 0
-
+    path = '/home/kodo/Desktop/video/'+loc
     #img_list = sorted(os.listdir('video/capture'))
-    img_list = os.listdir('video/capture')
+    img_list = os.listdir(path)
     ps = 0
 
     for i in range(len(img_list)-1, 0, -1):
         current = i
         previous = i-1
         #print(previous)
-        cur_img = cv2.imread('video/capture/' + str(current) + '.PNG', cv2.IMREAD_GRAYSCALE)
-        prev_img = cv2.imread('video/capture/' + str(previous) + '.PNG', cv2.IMREAD_GRAYSCALE)
+        cur_img = cv2.imread(path + str(current) + '.PNG', cv2.IMREAD_GRAYSCALE)
+        prev_img = cv2.imread(path + str(previous) + '.PNG', cv2.IMREAD_GRAYSCALE)
         
         # SSIM = (2Ux*Uy + c1)*(2Rxy + c2) / (Ux**2 + Uy**2 + c1)*(Rx**2 + Ry**2 + c2)
         s = ssim(cur_img, prev_img)
@@ -48,7 +48,7 @@ def main():
     # post processing of start_load	
     temp_lst = []
     for i in range(len(start_load)-1):
-        if (i==0 or start_load[i] - start_load[i+1] < 5):
+        if (i==0 or start_load[i] - start_load[i+1] < 6):
             temp_lst.append(start_load[i])		
     
     for i in range(len(temp_lst)):
@@ -57,7 +57,7 @@ def main():
     try:
         if(len(end_load) == len(start_load)):
             for i in range(len(end_load), 0, -1):
-                print(end_load[i-1], "-", start_load[i-1])
+#print(end_load[i-1], "-", start_load[i-1])
                 timeline.append(round(end_load[i-1]-start_load[i-1], 2))
     except Exception as e:
         print(e)
@@ -68,5 +68,10 @@ def main():
     
 
 if __name__ == '__main__':
-    main()
+    count = 1
+    while(count<11):
+        print(count)
+        loc = 'test'+str(int(count))+'/'
+        main(loc)
+        count += 1
     

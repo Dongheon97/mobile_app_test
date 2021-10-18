@@ -2,12 +2,12 @@ import cv2
 import os
 import time
 
-def main(loc):
+def main(loc, count):
     # video file path
     experiment = 'test' + str(int(count)) 
     path = loc + experiment
     print(path)
-    file_name = path + '.avi'
+    file_name = path + '.MP4'
     print(file_name)
     vidcap = cv2.VideoCapture(file_name)
     frame = 0
@@ -31,7 +31,8 @@ def main(loc):
         
 if __name__ == '__main__':
     loc = '/home/kodo/Desktop/video/'
-    count = 0
-    while(count < 11):
+    count = 1
+    while(count < 2):
          main(loc, count)
          time.sleep(5)
+         count += 1

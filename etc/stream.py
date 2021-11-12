@@ -30,7 +30,7 @@ while True:
     
     # cutting image
     dst = frame[:, w_start+1:w_end+1]
-    print(dst.shape)
+#print(dst.shape)
     
     cv2.imshow("video", frame)
     cv2.waitKey(1)

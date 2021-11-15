@@ -47,8 +47,9 @@ scenario = function(){
 	tapster.click(0, -17);	waitSync(7);
 	
 	// 실행 내역 삭제
-	tapster.iReset();}
+	tapster.iReset();
+}
 
 module.exports = {
-    scenario
+	scenario
 }

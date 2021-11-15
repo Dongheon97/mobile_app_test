@@ -1,46 +1,25 @@
-const chrome = require('../public/javascript/chrome.js')
-const naver = require('../public/javascript/naver.js')
-const melon = require('../public/javascript/melon.js')
-const waitSync = require('wait-sync')
-
 var express = require('express');
 var router = express.Router();
 
+const chromeRouter = require('./written/chromeRouter');
+const naverRouter = require('./written/naverRouter');
+const melonRouter = require('./written/melonRouter');
+
 router.get('/', function(req, res, next){
-	res.render('./index.html', { title : 'Express' })
+	res.render('./index.html', { title : 'Express' });
 })
 
 router.get('/written', function(req, res, next){
-	res.render('./written.html', { title: 'Express' })
+	res.render('./written.html', { title: 'Express' });
 })
 
-router.get('/chrome', function(req,res){
-	const spawn = require('child_process').spawn;
-	// change your file path
-	const result = spawn('python3', ['public/python/record.py']);
-	if(result){
-		console.log("connected");
-	}
-	console.log("record start!")
-	result.stdout.on('data', function(data){
-		console.log(data.toString());
-	});
-	result.stderr.on('data', function(data){
-		console.log(data.toString());
-	});
-	try{
-		console.log("start");
-		waitSync(3);
-		chrome.scenario();
-		console.log("end");
-	}catch(err){
-		console.log(err);
-	}
-	return res.redirect("../");
-	//res.end();
-}); 
+router.use('/chrome', chromeRouter);
+router.use('/naver', naverRouter);
+router.use('/melon', melonRouter);
 
 module.exports = router;
+
+
 /*
 module.exports = function(app, fs){
 	app.get('/', function(req, res){

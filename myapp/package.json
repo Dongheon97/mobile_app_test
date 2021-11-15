@@ -18,7 +18,6 @@
     "wait-sync": "^1.0.1",
     "xml2js": "^0.4.23"
   },
-  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

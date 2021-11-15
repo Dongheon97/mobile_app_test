@@ -1,39 +1,21 @@
-<!--
-<input type="button" id="iOS" onclick="iOS_click('iOS');" value="iOS"/>
-<script>
-    function iOS_click(s){
-        console.log(s);   
-    }
-</script>
-<input type="button" id="ios" value="iOS" />
-<input type="button" id="android" value="Android" />
-
-<button onclick="iOS_click(click_ios);">
-            iOS
-            <script src="../router/execute.js"></script>
-            <script>
-                function iOS_click(s){
-                    console.log(s);
-                }
-            </script>
-</button>
-<button>
-    Android 
-</button>
--->
-
-<button onclick="iOS_click(click_ios);">
-    iOS
-    <script src="../router/execute.js"></script>
+<button onclick="Custom(custom);">
+    Custom
+    <!--script src="../router/execute.js"></script-->
+    <script src="./"></script>
     <script>
-        function iOS_click(s){
+        function Custom(s){
             console.log(s);
         }
     </script>
 </button>
-<button>
-    Android
-
+<button onclick="Written(written);">
+    Written
+    <script src="written.html"></script>
+    <script>
+        function Written(s){
+            console.log(s);
+        }
+    </script>
 </button>
 
 <script src="../router/execute.js">

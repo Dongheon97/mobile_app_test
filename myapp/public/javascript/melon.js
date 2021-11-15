@@ -1,4 +1,4 @@
-var tapster = require('../public/javascript/clickApp.js');
+var tapster = require('./clickApp.js');
 var waitSync = require('wait-sync');
 
 scenario = function(){

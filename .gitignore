@@ -1,1 +1,4 @@
-backend/ip/video/
+*.avi
+*.png
+*.PNG
+node_modules

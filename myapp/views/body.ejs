@@ -1,39 +1,12 @@
-<button onclick="Custom(custom);">
-    Custom
-    <!--script src="../router/execute.js"></script-->
-    <script src="./"></script>
+<body>
+    <button onclick="location.href='./custom'; " >
+        Custom
+    </button>
+    <button onclick="location.href='./written'; " >
+        Written
+    </button>
     <script>
-        function Custom(s){
-            console.log(s);
-        }
-    </script>
-</button>
-<button onclick="Written(written);">
-    Written
-    <script src="written.html"></script>
-    <script>
-        function Written(s){
-            console.log(s);
-        }
-    </script>
-</button>
 
-<script src="../router/execute.js">
-    var t1 = document.getElementById('ios');
-    var t2 = document.getElementById('android');
-    function btn_listener(event){
-        switch(event.target.id){
-            case 'ios':
-                console.log("ios_exec");
-                break;
-            case 'android':
-                android_scenario();
-                colsole.log("android_exec");
-                break;
-        }
-    }
-    t1.addEventListener('click', btn_listener);
-    t2.addEventListener('click', btn_listener);
-</script>
-
-<link rel="stylesheet" href="css/button.css">
+    </script>
+    <link rel="stylesheet" href="css/button.css">
+</body>

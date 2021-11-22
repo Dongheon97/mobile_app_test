@@ -46,7 +46,7 @@ def main(cap, fc):
     out = cv2.VideoWriter(path,cv2.VideoWriter_fourcc('M','J','P','G'), 30, (frame_width,frame_height))
     while(cap.isOpened() or current != 0):
         #print(time.time()-start)
-        if (time.time()-start > 80): # 시간이 바뀌면 영상파일을 새로 만든다. (시간으로 감지)
+        if (time.time()-start > 160): # 시간이 바뀌면 영상파일을 새로 만든다. (시간으로 감지)
             start = time.time()
             current+=1
             print('파일 저장 완료')
@@ -69,7 +69,7 @@ def main(cap, fc):
     cv2.destroyAllWindows()
 
 if __name__ == '__main__':
-    cap = cv2.VideoCapture(2)                   # get Video
+    cap = cv2.VideoCapture(0)                   # get Video
     #cap.set(3, 600)                             # 윈도우 크기
     #cap.set(4, 800)
     fc = 30.0                                   # Set FPS

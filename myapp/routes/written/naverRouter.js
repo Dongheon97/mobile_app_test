@@ -1,11 +1,11 @@
 var express=require('express');
-var router = express.Router();
+var appRouter = express.Router();
 
 var naver = require('../../public/javascript/naver');
 var waitSync = require('wait-sync');
 
-router.get("/", async (req, res, next) => {
-	res.render('./written/naver.html');
+appRouter.get("/", async (req, res, next) => {
+	res.render('./written/naver');
 	const spawn = require('child_process').spawn;
 	// change your file path
 	const result = spawn('python3', ['public/python/record.py']);
@@ -27,8 +27,8 @@ router.get("/", async (req, res, next) => {
 	}catch(err){
 		console.log(err);
 	}
-	res.redirect("../");
+	//res.redirect("../");
 	res.end();
 });
 
-module.exports = router;
+module.exports = appRouter;

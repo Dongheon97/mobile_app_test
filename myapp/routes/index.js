@@ -6,15 +6,15 @@ const naverRouter = require('./written/naverRouter');
 const melonRouter = require('./written/melonRouter');
 
 router.get('/', function(req, res, next){
-	res.render('./index.html', { title : 'Express' });
+	res.render('./index', { title : 'Express' });
 })
 
 router.get('/custom', function(req, res, next){
-	res.render('./custom/custom.html', { title: 'Express' });
+	res.render('./custom/custom', { title: 'Express' });
 })
 
 router.get('/written', function(req, res, next){
-	res.render('./written/written.html', { title: 'Express' });
+	res.render('./written/written', { title: 'Express' });
 })
 
 router.use('/written/chrome', chromeRouter);

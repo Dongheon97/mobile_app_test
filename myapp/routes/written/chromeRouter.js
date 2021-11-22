@@ -1,12 +1,12 @@
 var express=require('express');
-var router = express.Router();
+var appRouter = express.Router();
 
 var chrome = require('../../public/javascript/chrome');
 var waitSync = require('wait-sync');
 
 
-router.get("/", async (req, res, next) => {
-	res.render('./written/chrome.html');
+appRouter.get("/", async (req, res, next) => {
+	res.render('./written/chrome', { title: 'Express' });
 	const spawn = require('child_process').spawn;
 	// change your file path
 	const result = spawn('python3', ['public/python/record.py']);
@@ -28,8 +28,7 @@ router.get("/", async (req, res, next) => {
 	}catch(err){
 		console.log(err);
 	}
-	res.redirect("../");
 	res.end();
 });
 
-module.exports = router;
+module.exports = appRouter;

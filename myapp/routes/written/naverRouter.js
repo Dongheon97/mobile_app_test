@@ -4,7 +4,8 @@ var router = express.Router();
 var naver = require('../../public/javascript/naver');
 var waitSync = require('wait-sync');
 
-router.post("/", async (req, res) => {
+router.get("/", async (req, res, next) => {
+	res.render('./written/naver.html');
 	const spawn = require('child_process').spawn;
 	// change your file path
 	const result = spawn('python3', ['public/python/record.py']);

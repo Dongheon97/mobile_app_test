@@ -9,13 +9,17 @@ router.get('/', function(req, res, next){
 	res.render('./index.html', { title : 'Express' });
 })
 
-router.get('/written', function(req, res, next){
-	res.render('./written.html', { title: 'Express' });
+router.get('/custom', function(req, res, next){
+	res.render('./custom/custom.html', { title: 'Express' });
 })
 
-router.use('/chrome', chromeRouter);
-router.use('/naver', naverRouter);
-router.use('/melon', melonRouter);
+router.get('/written', function(req, res, next){
+	res.render('./written/written.html', { title: 'Express' });
+})
+
+router.use('/written/chrome', chromeRouter);
+router.use('/written/naver', naverRouter);
+router.use('/written/melon', melonRouter);
 
 module.exports = router;
 

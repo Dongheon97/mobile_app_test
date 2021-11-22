@@ -5,7 +5,8 @@ var chrome = require('../../public/javascript/chrome');
 var waitSync = require('wait-sync');
 
 
-router.post("/", async (req, res) => {
+router.get("/", async (req, res, next) => {
+	res.render('./written/chrome.html');
 	const spawn = require('child_process').spawn;
 	// change your file path
 	const result = spawn('python3', ['public/python/record.py']);

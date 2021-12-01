@@ -1,4 +1,5 @@
 *.avi
 *.png
 *.PNG
+*.csv
 node_modules

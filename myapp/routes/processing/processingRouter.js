@@ -4,11 +4,11 @@ var processorRouter = express.Router();
 
 //var waitSync = require('wait-sync');
 
-processorRouter.get("/", async (req, res, next) => {
+processorRouter.get("/", (req, res, next) => {
 	//res.render('./written/chrome', { title: 'Express' });
 	const spawn = require('child_process').spawn;
 	// change your file path
-	const result = spawn('python3', ['public/python/capture.py']);
+	const result = spawn('python3', ['public/python/processing.py']);
 	if(result){
 		console.log("connected");
 	}

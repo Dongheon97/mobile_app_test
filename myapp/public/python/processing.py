@@ -5,6 +5,8 @@ import cv2
 import os
 
 def capture(path):
+    print('start image capturing process\n')
+    path = path + '/0.avi'
     # video file path
     vidcap = cv2.VideoCapture(path)
 
@@ -16,25 +18,24 @@ def capture(path):
         ret, image = vidcap.read()
     
         if(int(vidcap.get(1)) % 3 == 0):
-            print('Saved frame number : ' + str(int(vidcap.get(1))))
             cv2.imwrite('video/capture/%d.PNG' %count, image)
-            
             count += 1
         image_count += 1
         if(image_count == 3390):
             continuing = False
     vidcap.release()
+    #os.remove(path)
+    print('end image capturing process')
 
-def event_time(timeline):
-    print('start_processing')
+def event_time(path, timeline):
+    path = path + '/capture'
+    print('start image similiarity checking process\n')
     
     #img_list = sorted(os.listdir('video/capture'))
     img_list = os.listdir('video/capture')
-    print(len(img_list))
-    for i in range(len(img_list)-1, 0, -1):
-        current = i
-        previous = i-1
-        #print(previous)
+    for i in range(len(img_list)-1, 1, -1):
+        current = i-1
+        previous = i-2
         cur_img = cv2.imread('video/capture/' + str(current) + '.PNG', cv2.IMREAD_GRAYSCALE)
         prev_img = cv2.imread('video/capture/' + str(previous) + '.PNG', cv2.IMREAD_GRAYSCALE)
         
@@ -43,29 +44,29 @@ def event_time(timeline):
 
         event = float(previous)/10
 
-        #print(end_time, "           ", s, "                 ", ps)
-
         if (s < 0.95):
             timeline.append(event)
 
     print(timeline)
-    print('end_processing')
+    print('end image similarity checking process')
+    removeAllFile(path)
     return timeline
 
 def filter_event(timeline):
+    print('start data filtering process\n')
     timeline = timeline[1:]                         # 맨 마지막 이벤트 버림
     filtered = []
     time_tuple = []
     end = timeline[0]
     temp = 0
     start = 0
-    threshold = 5
+    threshold = 6
     time_tuple.append(end)
     for time in timeline:
         temp = time
         if(end == temp):
             continue
-        elif(end-temp < threshold):                 # threshold : 5
+        elif(end-temp < threshold):                 # threshold : 6
             start = temp
             length = len(timeline)
             if(start == timeline[length-1]):        # dealing last event 
@@ -78,14 +79,41 @@ def filter_event(timeline):
             end = temp
             time_tuple = []
             time_tuple.append(end)
-    print(filtered)
+    print('end data filtering process\n')
+    #print(filtered)
+    #print(len(filtered))
+    return filtered
+
+def removeAllFile(path):
+    print('start captured image removing process\n')
+    if os.path.exists(path):
+        for file in os.scandir(path):
+            os.remove(file.path)
+    else:
+        print('Directory Not Found!')
+    print('end captured image removing process')
+
+def list2csv(path, data):
+    path = path + '/tested.csv'
+    output = list(reversed(data))
+    if(os.path.isfile(path)):
+        f = open(path, 'a')
+    else:
+        f = open(path, 'w')
+    for i in range(len(output)):
+        num = 'test' + str(int(i+1))
+        sub = output[i][0] - output[i][1]
+        f.write((num) + ','+ str(sub) + ',' + str(output[i][1]) + ',' + str(output[i][0]) + '\n')
+    f.write('\n')
+    f.close()
 
 
 def main():
-    path = 'video/0.avi'
+    path = 'video'
     timeline = []
     capture(path)
-    filter_event(event_time(timeline))
+    data = filter_event(event_time(path, timeline))
+    list2csv(path, data)
     '''
     timeline = [110.4, 109.9, 109.8, 109.6, 109.5, 109.4, 109.3, 103.9, 103.8, 103.7, \
         103.3, 103.2, 103.1, 102.2, 102.1, 102.0, 94.5, 94.4, 94.3, 94.2, 93.5, 93.4, \

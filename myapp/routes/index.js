@@ -1,184 +1,32 @@
 var express = require('express');
 var router = express.Router();
 
-const chromeRouter = require('./written/chromeRouter');
-const naverRouter = require('./written/naverRouter');
-const melonRouter = require('./written/melonRouter');
+const chromeRouter = require('./select/chromeRouter');
+const naverRouter = require('./select/naverRouter');
+const melonRouter = require('./select/melonRouter');
+
+const imageProcessRouter = require('./processing/processingRouter');
 
 router.get('/', function(req, res, next){
 	res.render('./index', { title : 'Express' });
 })
 
-router.get('/custom', function(req, res, next){
-	res.render('./custom/custom', { title: 'Express' });
+router.get('/auto', function(req, res, next){
+	res.render('./auto/auto', { title: 'Express' });
 })
 
-router.get('/written', function(req, res, next){
-	res.render('./written/written', { title: 'Express' });
+router.get('/select', function(req, res, next){
+	res.render('./select/select', { title: 'Express' });
 })
 
-router.use('/written/chrome', chromeRouter);
-router.use('/written/naver', naverRouter);
-router.use('/written/melon', melonRouter);
+router.use('/select/chrome', chromeRouter);
+router.use('/select/naver', naverRouter);
+router.use('/select/melon', melonRouter);
+
+router.use('/select/chrome/ip', imageProcessRouter);
+router.use('/select/naver/ip', imageProcessRouter);
+router.use('/select/melon/ip', imageProcessRouter);
 
 module.exports = router;
 
 
-/*
-module.exports = function(app, fs){
-	app.get('/', function(req, res){
-		//res.render('index.ejs');
-		res.render('index', {
-			title: "Result Page",
-			//length: 5
-		});
-	});
-	app.get('/custom', function(req, res){
-		res.render('custom.html');
-		// res.render('index', {
-		// 	title: "Result Page",
-		// 	length: 5
-		// });
-	});
-	app.get('/written', function(req, res){
-		res.render('written.html');
-		// res.render('index', {
-		// 	title: "Result Page",
-		// 	length: 5
-		// });
-	});
-	app.get('/list', function(req, res){
-		fs.readFile( __dirname + "/../data/" + "result.json", 'utf8', function (err, data) {
-			console.log( data );
-			res.end( data );
-		});
-	});
-
-	app.get('/result/:num', function(req, res){
-		fs.readFile( __dirname + "/../data/result.json", 'utf8', function (err, data){
-			var appNames = JSON.parse(data);
-			res.json(appNames[req.params.num]);
-		});
-		res.end();
-	});
-	
-	app.post('/add/:num', function(req, res){
-		var result = {};
-		var num = req.params.num;
-
-		// Check Validity
-		if(!req.body["appName"]){
-			result["success"] = 0;
-			result["error"] = "Invalid Request";
-			res.json(result);
-			return;
-		}
-
-		// Load Data & Check Dupblication
-		fs.readFile( __dirname + "/../data/result.json", 'utf8', function (err, data){
-			var test = JSON.parse(data);
-			if(test[num]){
-				result["success"] = 0;
-				result["error"] = "duplicate";
-				res.json(result);
-				return;
-			}
-			
-			// Add to Data
-			test[num] = req.body;
-
-			// Save Data
-			fs.writeFile(__dirname + "/../data/result.json",
-						JSON.stringify(test, null, '\t'), 'utf8', function(err,data){
-							result = {"success": 1};
-							res.json(result);
-						})
-		});
-		res.end();
-	});
-	// 파일 이름 받아와서 Speed Index 수행하기!
-	app.post('/chrome', function(req,res){
-		const spawn = require('child_process').spawn;
-		// change your file path
-		const result = spawn('python3', ['public/python/record.py']);
-		if(result){
-			console.log("connected");
-		}
-		console.log("record start!")
-		result.stdout.on('data', function(data){
-			console.log(data.toString());
-		});
-		result.stderr.on('data', function(data){
-			console.log(data.toString());
-		});
-		try{
-			console.log("start");
-			waitSync(3);
-			chrome.scenario();
-			console.log("end");
-		}catch(err){
-			console.log(err);
-		}
-		return res.redirect("../");
-		//res.end();
-	}); 
-
-	app.get('/naver', function(req, res){
-		const spawn = require('child_process').spawn;
-		// change your file path
-		const result = spawn('python3', ['public/python/record.py']);
-		if(result){
-			console.log("connected");
-		}
-		console.log("record start!")
-		result.stdout.on('data', function(data){
-			console.log(data.toString());
-		});
-		result.stderr.on('data', function(data){
-			console.log(data.toString());
-		});
-		try{
-			console.log("start");
-			waitSync(3);
-			naver.scenario();
-			console.log("end");
-		}catch(err){
-			console.log(err);
-		}
-		return res.redirect("../");
-		//res.end();
-	});
-
-	app.get('/melon', function(req, res){
-		const spawn = require('child_process').spawn;
-		// change your file path
-		const result = spawn('python3', ['public/python/record.py']);
-		if(result){
-			console.log("connected");
-		}
-		console.log("record start!")
-		result.stdout.on('data', function(data){
-			console.log(data.toString());
-		});
-		result.stderr.on('data', function(data){
-			console.log(data.toString());
-		});
-		try{
-			console.log("start");
-			waitSync(3);
-			melon.scenario();
-			console.log("end");
-		}catch(err){
-			console.log(err);
-		}
-		return res.redirect("../");
-		//res.end();
-	});
-
-	app.get('/stream', function(req, res){
-		console.log("video streaming test");
-		res.render('test.html');
-	});
-	
-}
-*/

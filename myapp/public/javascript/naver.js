@@ -25,43 +25,43 @@ scenario = function(){
 
 	// naver icon
 	tapster.click(25, 38);
-	waitSync(10);
+	waitSync(15);
 
 	// news contents tap
 	tapster.click(-19, -38);
-	waitSync(10);
+	waitSync(15);
 
 	// top list
 	tapster.click(0, -3);
-	waitSync(10);
+	waitSync(15);
 
 	// backward
 	tapster.click(14, -44);
-	waitSync(10);
+	waitSync(15);
 
 	// naver icon
 	tapster.click(25, 38);
-	waitSync(10);
+	waitSync(15);
 
 	// naver menu
 	tapster.click(25, 38);
-	waitSync(10);
+	waitSync(15);
 
 	// mail
 	tapster.click(21, 9);
-	waitSync(10);
+	waitSync(15);
 	
 	// naver icon
 	tapster.click(25, 38);
-	waitSync(10);
+	waitSync(15);
 	
 	// Naver Na
 	tapster.click(-19, 43);
-	waitSync(10);
+	waitSync(15);
 
 	// QR check-in
 	tapster.click(15, -17);
-	waitSync(10);
+	waitSync(15);
 	
 	// 실행 내역 삭제
 	tapster.iReset();

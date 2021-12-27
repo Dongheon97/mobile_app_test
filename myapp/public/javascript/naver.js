@@ -6,14 +6,14 @@ scenario = function(){
 
 	// test move for stable executing
 	tapster.swipeUp();
-	waitSync(10);
+	waitSync(5);
 
 	tapster.iMenu();
 	waitSync(10);
 
 	// open naver
 	tapster.click(0, 13);
-	waitSync(10);
+	waitSync(15);
 
 	// search bar
 	tapster.click(0, 20);
@@ -56,11 +56,11 @@ scenario = function(){
 	waitSync(10);
 	
 	// Naver Na
-	tapster.click(-19, 43);
+	tapster.click(-18, 43);
 	waitSync(10);
 
-	// QR check-in
-	tapster.click(15, -17);
+	// Naver Pay
+	tapster.click(0, -20);
 	waitSync(10);
 	
 	// 실행 내역 삭제

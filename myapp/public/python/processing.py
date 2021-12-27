@@ -1,10 +1,11 @@
-from skimage.metrics import structural_similarity as ssim 
-import matplotlib.pyplot as plt 
-import numpy as np 
+from skimage.measure import compare_ssim as ssim
 import cv2
 import os
 
 def capture(path):
+    if(not os.path.isdir(path+'/capture')):
+        os.mkdir(path + '/capture')
+
     print('start image capturing process\n')
     path = path + '/0.avi'
     # video file path

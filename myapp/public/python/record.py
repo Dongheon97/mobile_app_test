@@ -69,10 +69,10 @@ def main(cap, fc):
     cv2.destroyAllWindows()
 
 if __name__ == '__main__':
-    cap = cv2.VideoCapture(1)                   # get Video
+    cap = cv2.VideoCapture(0)                   # get Video
     #cap.set(3, 600)                             # 윈도우 크기
     #cap.set(4, 800)
     fc = 30.0                                   # Set FPS
     #codec = cv2.VideoWriter_fourcc(*'mp4v')     # mp4 codec 
 
-    main(cap, fc) 
+main(cap, fc) 

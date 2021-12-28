@@ -1,4 +1,8 @@
+<<<<<<< Updated upstream
 from skimage.measure import compare_ssim as ssim
+=======
+from skimage.metrics import structural_similarity as ssim 
+>>>>>>> Stashed changes
 import cv2
 import os
 
@@ -25,7 +29,7 @@ def capture(path):
         if(image_count == 3390):
             continuing = False
     vidcap.release()
-    #os.remove(path)
+    os.remove(path)
     print('end image capturing process')
 
 def event_time(path, timeline):
@@ -51,6 +55,7 @@ def event_time(path, timeline):
     print(timeline)
     print('end image similarity checking process')
     removeAllFile(path)
+    
     return timeline
 
 def filter_event(timeline):
@@ -115,16 +120,6 @@ def main():
     capture(path)
     data = filter_event(event_time(path, timeline))
     list2csv(path, data)
-    '''
-    timeline = [110.4, 109.9, 109.8, 109.6, 109.5, 109.4, 109.3, 103.9, 103.8, 103.7, \
-        103.3, 103.2, 103.1, 102.2, 102.1, 102.0, 94.5, 94.4, 94.3, 94.2, 93.5, 93.4, \
-            93.3, 93.2, 93.1, 93.0, 92.9, 92.7, 92.6, 92.5, 92.4, 84.4, 84.3, 84.2, 83.6, \
-                83.5, 83.4, 82.3, 82.2, 82.1, 82.0, 81.7, 80.6, 80.0, 79.9, 79.8, 79.6, 71.8, \
-                    71.7, 71.6, 71.5, 69.9, 69.8, 69.3, 69.2, 68.3, 68.2, 68.1, 68.0, 66.5, 66.4, \
-                        60.3, 60.2, 60.1, 59.0, 53.0, 52.3, 52.2, 45.5, 45.4, 45.3, 38.0, 37.9, 37.8, \
-                            31.6, 31.5, 31.4, 25.0, 24.9, 24.8, 24.7, 24.6, 24.5, 24.3, 24.2, 24.1, 17.7, \
-                                17.6, 16.7, 16.6, 9.7, 9.6, 9.5, 1.8, 1.7, 1.6]
-    filter_event(timeline)
-    '''
+   
 if __name__ == "__main__":
     main()

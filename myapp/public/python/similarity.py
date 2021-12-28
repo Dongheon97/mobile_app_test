@@ -54,20 +54,4 @@ def main():
 
 if __name__ == '__main__':
     main()
-    '''img1 = cv2.imread('video/capture/55.PNG', cv2.IMREAD_GRAYSCALE)
-    img2 = cv2.imread('video/capture/54.PNG', cv2.IMREAD_GRAYSCALE)
-    print(ssim(img1, img2))'''
-
-
-'''if (ps < 0.95):  
-            #start_load = start_time
-            start_load = end_load
-            if(start_load == 0):
-                start_load = start_time
-                print("                    ", start_load)
-                #temp = [start_load, end_load]
-                #timeline.append(temp)
-            
-            else:
-                if(start_load - start_time > 5):
-                    start_load = 0'''
+    

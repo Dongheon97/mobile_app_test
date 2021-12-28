@@ -1,13 +1,14 @@
 import cv2
 
-# Check your camera input
-cap = cv2.VideoCapture(0)
+
+# 카메라 선택
+cap = cv2.VideoCapture(1)
 # 해상도 변경
 cap.set(cv2.CAP_PROP_FRAME_WIDTH, 1280)
 cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 760)
 cap.set(cv2.CAP_PROP_FPS, 30)
 
-# 디스플레이에 맞는 크기 설정하기
+# 디스플레이에 맞는 크기 설정
 ret, src = cap.read()
 gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)
 
@@ -35,4 +36,3 @@ while True:
     cv2.imshow("video", frame)
     cv2.waitKey(1)
 
-# 351 / 407

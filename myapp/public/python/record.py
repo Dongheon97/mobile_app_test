@@ -19,15 +19,7 @@ def get_frame_size(input_gray):
 def main(cap, fc):
     cap.set(3, 768) # 윈도우 크기
     cap.set(4, 1280)
-    '''
-    try:
-        # cutting rest of images
-        ret, src = cap.read()
-        gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)
-        h, w_start, w_end = get_frame_size(gray)
-    except Exception e:
-        print(e)    
-    '''
+   
     # Get start time
     start = time.time()
     

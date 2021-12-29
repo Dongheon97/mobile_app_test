@@ -1,8 +1,3 @@
-<<<<<<< Updated upstream
-from skimage.measure import compare_ssim as ssim
-=======
-from skimage.metrics import structural_similarity as ssim 
->>>>>>> Stashed changes
 import cv2
 import os
 
